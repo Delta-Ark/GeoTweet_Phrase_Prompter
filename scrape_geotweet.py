@@ -5,10 +5,10 @@ words = []
 joined = " "
 
 #access_codes
-api_key = #put your api key here in quotation marks
-api_secret = #put your api secret key here in quotation marks
-access_token = #put your access token here in quotation marks
-token_secret = #put your secret token here in quotation marks
+api_key = #put yours
+api_secret = #put yours
+access_token = #put yours
+token_secret = #put yours
 twitter = twython.Twython(api_key, api_secret, access_token, token_secret)
 
 #search parameters
@@ -28,15 +28,16 @@ if choice == "new":
     lon = raw_input("lon: ")
     radius = raw_input("radius in miles: ")
     tweet_type = raw_input("popular or recent: ")
+geocount = raw_input("count (<100): ")
 
 #extractor functions:
 #geo-search general
 def geo_search_gen():
-    response = twitter.search(result_type=tweet_type, count=100, geocode=lat+','+lon+','+radius+'mi')
+    response = twitter.search(result_type=tweet_type, count=geocount, geocode=lat+','+lon+','+radius+'mi')
     print "\n".join([r['text'] for r in response['statuses']])
 #geo-search w/specific term
 def geo_search_spef(term):
-    response = twitter.search(q=term, result_type=tweet_type, count=100, geocode=lat+','+lon+','+radius+'mi')
+    response = twitter.search(q=term, result_type=tweet_type, count=geocount, geocode=lat+','+lon+','+radius+'mi')
     print "\n".join([r['text'] for r in response['statuses']])
 
 #loop
